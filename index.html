@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>你的名字 · 软件工程师个人主页</title>
+<meta name="description" content="你的名字的个人主页：简历、作品集与技术分享。">
+<meta property="og:title" content="你的名字 · 软件工程师个人主页">
+<meta property="og:description" content="个人简历与作品集">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1120'/%3E%3Cpath d='M8 11l6 5-6 5' stroke='%232dd4bf' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17 21h7' stroke='%2360a5fa' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0b1120;--bg-2:#0d1526;--panel:#0f182c;--panel-2:#0a1220;
+  --line:#1c2a45;--line-soft:rgba(255,255,255,.07);
+  --text:#e9effa;--muted:#9db0cc;--dim:#6f82a1;
+  --accent:#2dd4bf;--accent-soft:rgba(45,212,191,.14);--accent-line:rgba(45,212,191,.4);
+  --sky:#60a5fa;--amber:#fbbf24;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --font-mono:ui-monospace,"Cascadia Code","JetBrains Mono","SF Mono",Consolas,"Courier New",monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:#05221d}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;line-height:1.25;font-weight:700}
+p{margin:0 0 1em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.section{padding:64px 0}
+.eyebrow{font-family:var(--font-mono);font-size:.875rem;color:var(--accent);letter-spacing:.02em;margin-bottom:10px}
+.section h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:12px}
+.section-rule{height:1px;background:linear-gradient(90deg,var(--accent-line),transparent 70%);border:0;margin:0 0 28px}
+.lead{color:var(--muted);max-width:60ch}
+
+/* ===== 导航 ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(11,17,32,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-family:var(--font-mono);font-size:.95rem;color:var(--accent);display:flex;align-items:center;gap:8px}
+.logo svg{flex:none}
+.nav-links{display:none;align-items:center;gap:4px}
+.nav-link{font-family:var(--font-mono);font-size:.875rem;color:var(--muted);padding:12px 12px;border-radius:8px;min-height:44px;display:inline-flex;align-items:center;transition:color .15s}
+.nav-link:hover{color:var(--text)}
+.nav-link.active{color:var(--accent)}
+.menu-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--text);cursor:pointer;padding:0}
+.menu-btn:hover{border-color:var(--accent)}
+@media (max-width:639px){
+  .nav-open .nav-links{display:flex;flex-direction:column;align-items:stretch;position:absolute;top:64px;left:0;right:0;background:var(--bg-2);border-bottom:1px solid var(--line);padding:10px 16px 14px}
+}
+
+/* ===== Hero ===== */
+.hero{position:relative;padding:140px 0 72px;overflow:hidden}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 35%,transparent 78%);mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 35%,transparent 78%);pointer-events:none}
+.bg-glow{position:absolute;inset:0;background:radial-gradient(620px 340px at 12% 8%,rgba(45,212,191,.16),transparent 62%),radial-gradient(560px 320px at 88% 16%,rgba(96,165,250,.13),transparent 62%);pointer-events:none}
+.hero-inner{position:relative}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.875rem;color:var(--sky);margin-bottom:14px}
+.hero h1{font-size:clamp(2.1rem,6vw,3.4rem);letter-spacing:-.01em;margin-bottom:10px}
+.hero h1 .name-accent{color:var(--accent)}
+.hero-role{font-family:var(--font-mono);font-size:1rem;color:var(--muted);margin-bottom:18px}
+.status-line{display:flex;align-items:center;gap:10px;font-size:.95rem;color:var(--muted);margin-bottom:26px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--amber);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.45)}50%{box-shadow:0 0 0 6px rgba(251,191,36,0)}}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px}
+.meta-chip{font-family:var(--font-mono);font-size:.875rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:rgba(255,255,255,.02)}
+
+/* ===== 按钮 ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s;border:1px solid transparent}
+.btn-primary{background:var(--accent);color:#05221d}
+.btn-primary:hover{box-shadow:0 6px 24px rgba(45,212,191,.35);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-sm{min-height:42px;padding:0 14px;font-size:.9rem;border-radius:8px}
+
+/* ===== 终端卡片 ===== */
+.term{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(2,8,20,.55)}
+.term-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--bg-2)}
+.term-dot{width:11px;height:11px;border-radius:50%}
+.term-dot.r{background:#f87171}.term-dot.y{background:var(--amber)}.term-dot.g{background:#34d399}
+.term-title{font-family:var(--font-mono);font-size:.8rem;color:var(--dim);margin-left:6px}
+.term-body{padding:18px 20px;overflow-x:auto}
+.term-body pre{font-family:var(--font-mono);font-size:.875rem;line-height:1.8;margin:0;white-space:pre}
+.tk{color:var(--accent)}.st{color:var(--amber)}.pr{color:var(--sky)}.cm{color:var(--dim)}.pu{color:var(--muted)}
+.cursor{display:inline-block;width:8px;height:1.1em;background:var(--accent);vertical-align:text-bottom;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ===== 关于 ===== */
+.about-grid{display:grid;gap:28px}
+.info-list{display:grid;gap:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+.info-row{display:flex;justify-content:space-between;gap:16px;padding:14px 18px;font-size:.95rem}
+.info-row + .info-row{border-top:1px solid var(--line)}
+.info-label{font-family:var(--font-mono);font-size:.875rem;color:var(--dim);flex:none}
+.info-value{color:var(--text);text-align:right;overflow-wrap:anywhere}
+
+/* ===== 技能 ===== */
+.skill-group{margin-bottom:26px}
+.skill-group h3{font-family:var(--font-mono);font-size:.95rem;color:var(--sky);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-family:var(--font-mono);font-size:.875rem;color:var(--accent);border:1px solid var(--accent-line);border-radius:999px;padding:6px 14px;background:var(--accent-soft)}
+
+/* ===== 项目 ===== */
+.proj-grid{display:grid;gap:20px}
+.proj-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .18s,transform .18s}
+.proj-card:hover{border-color:var(--accent-line);transform:translateY(-4px)}
+.card-cover{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:2.4rem;color:rgba(233,239,250,.9);border-bottom:1px solid var(--line);background:linear-gradient(135deg,rgba(45,212,191,.2),rgba(96,165,250,.16)),var(--panel-2)}
+.proj-card:nth-child(3n+2) .card-cover{background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(45,212,191,.16)),var(--panel-2)}
+.proj-card:nth-child(3n) .card-cover{background:linear-gradient(135deg,rgba(45,212,191,.14),rgba(52,211,153,.2)),var(--panel-2)}
+.proj-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.proj-body h3{font-size:1.08rem}
+.proj-body p{font-size:.92rem;color:var(--muted);margin:0;flex:1}
+.proj-links{display:flex;gap:10px;margin-top:4px}
+
+/* ===== 经历时间轴 ===== */
+.timeline{display:grid;gap:0;margin-top:6px}
+.tl-item{position:relative;display:grid;grid-template-columns:1fr;gap:2px 0;padding:0 0 30px 34px}
+.tl-item:last-child{padding-bottom:4px}
+.tl-item::before{content:"";position:absolute;left:6px;top:20px;bottom:0;width:2px;background:var(--line)}
+.tl-item:last-child::before{display:none}
+.tl-dot{position:absolute;left:7px;top:9px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(45,212,191,.16);transform:translateX(-50%)}
+.tl-time{font-family:var(--font-mono);font-size:.875rem;color:var(--dim);margin-bottom:4px}
+.tl-body h3{font-size:1.05rem;margin-bottom:4px}
+.tl-body p{font-size:.92rem;color:var(--muted);margin:0}
+
+/* ===== 联系 ===== */
+.contact-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px 24px;display:grid;gap:22px}
+.contact-card p{color:var(--muted);margin:0}
+.contact-actions{display:flex;flex-wrap:wrap;gap:12px}
+.social-chips{display:flex;flex-wrap:wrap;gap:10px}
+.social-chip{font-family:var(--font-mono);font-size:.875rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:9px 16px;display:inline-flex;align-items:center;gap:8px;min-height:44px;transition:color .15s,border-color .15s}
+.social-chip:hover{color:var(--accent);border-color:var(--accent-line)}
+.social-chip svg{flex:none}
+
+/* ===== 页脚 ===== */
+.footer{border-top:1px solid var(--line);padding:28px 0;color:var(--dim);font-size:.875rem;text-align:center}
+.footer .mono{font-family:var(--font-mono)}
+
+/* ===== Toast ===== */
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(16px);background:var(--panel);border:1px solid var(--accent-line);color:var(--text);font-size:.9rem;padding:12px 20px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:99;max-width:calc(100vw - 40px);box-shadow:0 12px 32px rgba(2,8,20,.5)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== 桌面端 ===== */
+@media (min-width:640px){
+  .section{padding:84px 0}
+  .about-grid{grid-template-columns:1fr 1fr;align-items:start}
+  .proj-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:960px){
+  .nav-links{display:flex}
+  .menu-btn{display:none}
+  .hero{padding:170px 0 100px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .proj-grid{grid-template-columns:repeat(3,1fr)}
+  .tl-item{grid-template-columns:150px 44px 1fr;gap:0;padding:0 0 34px}
+  .tl-item::before{left:calc(150px + 21px);top:16px;bottom:0;transform:translateX(-50%)}
+  .tl-item:last-child::before{display:none}
+  .tl-dot{position:static;justify-self:center;align-self:start;margin-top:8px;transform:none}
+  .tl-time{text-align:right;padding-right:18px;margin-bottom:0}
+  .contact-card{padding:36px 40px;grid-template-columns:1.2fr 1fr;align-items:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo" aria-label="回到首页">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="8 6 13 11 8 16"/><line x1="15" y1="18" x2="20" y2="18"/></svg>
+      <span>~/your-name</span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
+      <a class="nav-link" href="#about">关于</a>
+      <a class="nav-link" href="#skills">技能</a>
+      <a class="nav-link" href="#projects">作品</a>
+      <a class="nav-link" href="#experience">经历</a>
+      <a class="nav-link" href="#contact">联系</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="打开菜单" aria-expanded="false" aria-controls="navLinks">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="home" aria-label="首页">
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">你好，我是</div>
+        <h1><span class="name-accent">你的名字</span></h1>
+        <p class="hero-role">Software Engineer / 全栈开发</p>
+        <p class="status-line"><span class="dot" aria-hidden="true"></span>开放求职中 · 可远程协作</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">查看作品</a>
+          <a class="btn btn-ghost" href="#contact">联系我</a>
+        </div>
+        <div class="hero-meta">
+          <span class="meta-chip">郑州</span>
+          <span class="meta-chip">3年+ 经验</span>
+          <span class="meta-chip">github.com/your-name</span>
+        </div>
+      </div>
+      <div class="term" aria-hidden="true">
+        <div class="term-bar">
+          <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+          <span class="term-title">about.ts</span>
+        </div>
+        <div class="term-body">
+<pre><span class="cm">// 关于我（示例）</span>
+<span class="tk">const</span> me = {
+  <span class="pr">name</span>: <span class="st">'你的名字'</span>,
+  <span class="pr">role</span>: <span class="st">'Software Engineer'</span>,
+  <span class="pr">skills</span>: [<span class="st">'Vue'</span>, <span class="st">'Go'</span>, <span class="st">'TypeScript'</span>],
+  <span class="pr">location</span>: <span class="st">'Zhengzhou, CN'</span>,
+  <span class="pr">openToWork</span>: <span class="tk">true</span>,
+  <span class="pr">email</span>: <span class="st">'your-name@example.com'</span>
+};<span class="cursor"></span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="about" aria-label="关于我">
+  <div class="wrap">
+    <div class="eyebrow">// about</div>
+    <h2>关于我</h2>
+    <hr class="section-rule">
+    <div class="about-grid">
+      <div>
+        <p class="lead">这里是你的自我介绍占位文案：建议写 2~3 句话，说明你的技术方向、擅长领域、工作风格，以及你最想让访客记住的一个亮点。例如「5 年全栈开发经验，专注高并发系统与前端工程化，喜欢用简洁代码解决复杂问题」。</p>
+        <p class="lead">这段内容将来会被替换成你的真实介绍。</p>
+      </div>
+      <div class="info-list" role="list">
+        <div class="info-row" role="listitem"><span class="info-label">所在地</span><span class="info-value">郑州</span></div>
+        <div class="info-row" role="listitem"><span class="info-label">经验年限</span><span class="info-value">3 年+</span></div>
+        <div class="info-row" role="listitem"><span class="info-label">邮箱</span><span class="info-value">your-name@example.com</span></div>
+        <div class="info-row" role="listitem"><span class="info-label">GitHub</span><span class="info-value">github.com/your-name</span></div>
+        <div class="info-row" role="listitem"><span class="info-label">求职状态</span><span class="info-value">开放中</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills" aria-label="技术栈">
+  <div class="wrap">
+    <div class="eyebrow">// skills</div>
+    <h2>技术栈</h2>
+    <hr class="section-rule">
+    <div class="skill-group">
+      <h3>前端</h3>
+      <div class="chips"><span class="chip">Vue 3</span><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Vite</span><span class="chip">Tailwind CSS</span></div>
+    </div>
+    <div class="skill-group">
+      <h3>后端</h3>
+      <div class="chips"><span class="chip">Node.js</span><span class="chip">Go</span><span class="chip">Python</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Kafka</span></div>
+    </div>
+    <div class="skill-group">
+      <h3>工具与流程</h3>
+      <div class="chips"><span class="chip">Git</span><span class="chip">Linux</span><span class="chip">Docker</span><span class="chip">CI/CD</span><span class="chip">敏捷开发</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects" aria-label="作品集">
+  <div class="wrap">
+    <div class="eyebrow">// projects</div>
+    <h2>精选作品</h2>
+    <hr class="section-rule">
+    <p class="lead">以下为示例项目占位，替换成你的真实项目即可：每个项目放一张截图、一段 1~2 句话的说明和关键技术标签。</p>
+    <div class="proj-grid" style="margin-top:26px">
+      <article class="proj-card">
+        <div class="card-cover">&lt;/&gt;</div>
+        <div class="proj-body">
+          <h3>开源组件库</h3>
+          <p>一套覆盖常用业务场景的 UI 组件库，支持主题定制与按需引入，已在公司多个项目中落地。</p>
+          <div class="chips"><span class="chip">Vue 3</span><span class="chip">TypeScript</span><span class="chip">Vite</span></div>
+          <div class="proj-links">
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实演示地址">查看演示</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实代码仓库">查看代码</button>
+          </div>
+        </div>
+      </article>
+      <article class="proj-card">
+        <div class="card-cover">{ }</div>
+        <div class="proj-body">
+          <h3>数据可视化大屏</h3>
+          <p>实时数据监控大屏，支持多数据源接入与自定义图表配置，峰值支撑百万级点位渲染。</p>
+          <div class="chips"><span class="chip">ECharts</span><span class="chip">WebSocket</span><span class="chip">Node.js</span></div>
+          <div class="proj-links">
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实演示地址">查看演示</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实代码仓库">查看代码</button>
+          </div>
+        </div>
+      </article>
+      <article class="proj-card">
+        <div class="card-cover">=&gt;</div>
+        <div class="proj-body">
+          <h3>电商交易系统</h3>
+          <p>高并发下单、库存扣减与支付回调模块，压测 QPS 3000+，保障大促期间稳定运行。</p>
+          <div class="chips"><span class="chip">Go</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Kafka</span></div>
+          <div class="proj-links">
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实演示地址">查看演示</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实代码仓库">查看代码</button>
+          </div>
+        </div>
+      </article>
+      <article class="proj-card">
+        <div class="card-cover">AI</div>
+        <div class="proj-body">
+          <h3>AI 内容助手</h3>
+          <p>基于大模型 API 的写作辅助工具，包含对话管理、提示词模板与内容润色能力。</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">LLM API</span></div>
+          <div class="proj-links">
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实演示地址">查看演示</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实代码仓库">查看代码</button>
+          </div>
+        </div>
+      </article>
+      <article class="proj-card">
+        <div class="card-cover">&amp;&amp;</div>
+        <div class="proj-body">
+          <h3>自动化部署平台</h3>
+          <p>可视化 CI/CD 流水线，一键完成构建、测试与灰度发布，将发布耗时缩短 60%。</p>
+          <div class="chips"><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">CI/CD</span></div>
+          <div class="proj-links">
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实演示地址">查看演示</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实代码仓库">查看代码</button>
+          </div>
+        </div>
+      </article>
+      <article class="proj-card">
+        <div class="card-cover">#</div>
+        <div class="proj-body">
+          <h3>个人知识库</h3>
+          <p>Markdown 驱动的知识管理系统，支持全文检索与双链笔记，已有 500+ 篇笔记。</p>
+          <div class="chips"><span class="chip">Vue 3</span><span class="chip">Node.js</span><span class="chip">Elasticsearch</span></div>
+          <div class="proj-links">
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实演示地址">查看演示</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-toast="示例链接：替换为你的真实代码仓库">查看代码</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="section" id="experience" aria-label="工作经历">
+  <div class="wrap">
+    <div class="eyebrow">// experience</div>
+    <h2>经历</h2>
+    <hr class="section-rule">
+    <p class="lead">以下为示例条目，按时间倒序替换成你的真实经历（工作、实习、教育均可）。</p>
+    <div class="timeline" style="margin-top:26px">
+      <div class="tl-item">
+        <div class="tl-time">2024.07 — 至今</div>
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-body">
+          <h3>高级软件工程师 · 某科技公司</h3>
+          <p>负责核心交易系统架构升级，主导微服务拆分与性能优化，系统可用性提升至 99.99%。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">2021.07 — 2024.06</div>
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-body">
+          <h3>后端开发工程师 · 某互联网公司</h3>
+          <p>参与电商平台订单与库存系统开发，支撑双十一大促流量，累计处理订单数亿级。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">2017.09 — 2021.06</div>
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-body">
+          <h3>计算机科学与技术 · 某大学 · 本科</h3>
+          <p>主修数据结构、操作系统与计算机网络，多次获得校级奖学金。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact" aria-label="联系我">
+  <div class="wrap">
+    <div class="eyebrow">// contact</div>
+    <h2>联系我</h2>
+    <hr class="section-rule">
+    <div class="contact-card">
+      <div>
+        <p>如果你对我的经历或作品感兴趣，欢迎通过以下方式联系我。邮件通常会在 24 小时内回复。</p>
+        <p style="margin-top:10px">简历 PDF 下载与更多联系方式，替换成你的真实内容即可。</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:your-name@example.com">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          发邮件
+        </a>
+        <button class="btn btn-ghost" type="button" data-toast="简历占位：之后替换为你的真实 PDF">下载简历</button>
+      </div>
+    </div>
+    <div class="social-chips" style="margin-top:20px">
+      <a class="social-chip" href="https://github.com/your-name" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a class="social-chip" href="https://juejin.cn" target="_blank" rel="noopener" data-toast="示例链接：替换为你的掘金主页">掘金</a>
+      <a class="social-chip" href="https://www.zhihu.com" target="_blank" rel="noopener" data-toast="示例链接：替换为你的知乎主页">知乎</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> 你的名字 · 用 HTML / CSS / JS 构建</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+  var body=document.body, menuBtn=document.getElementById("menuBtn"), navLinks=document.getElementById("navLinks");
+  var toast=document.getElementById("toast"), toastTimer=null;
+
+  function showToast(msg){
+    toast.textContent=msg;
+    toast.classList.add("show");
+    if(toastTimer)clearTimeout(toastTimer);
+    toastTimer=setTimeout(function(){toast.classList.remove("show");},2400);
+  }
+  document.querySelectorAll("[data-toast]").forEach(function(el){
+    el.addEventListener("click",function(ev){ev.preventDefault();showToast(el.getAttribute("data-toast"));});
+  });
+
+  if(menuBtn){
+    menuBtn.addEventListener("click",function(){
+      var open=body.classList.toggle("nav-open");
+      menuBtn.setAttribute("aria-expanded",open?"true":"false");
+    });
+    navLinks.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click",function(){body.classList.remove("nav-open");menuBtn.setAttribute("aria-expanded","false");});
+    });
+  }
+
+  var yearEl=document.getElementById("year");
+  if(yearEl)yearEl.textContent=String(new Date().getFullYear());
+
+  var nav=document.getElementById("nav");
+  function onScroll(){
+    if(window.scrollY>10)nav.style.boxShadow="0 6px 24px rgba(2,8,20,.35)";
+    else nav.style.boxShadow="none";
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});
+  onScroll();
+
+  var sections=document.querySelectorAll("main section[id]");
+  var links=Array.prototype.slice.call(document.querySelectorAll(".nav-link"));
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(l){l.classList.toggle("active",l.getAttribute("href")==="#"+en.target.id);});
+        }
+      });
+    },{rootMargin:"-40% 0px -55% 0px"});
+    sections.forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>
+</body>
+</html>
